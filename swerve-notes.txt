@@ -1,0 +1,60 @@
+Sources:
+https://docs.yagsl.com/fundamentals/swerve-drive
+- for more in depth stuff
+
+This goes over how a SwerveDrive works, the information in here can also be found in a more verbose format in the link above.
+
+Tips:
+- Center the gyro on the robot
+- Good tools for debugging:
+  - https://github.com/Mechanical-Advantage/AdvantageScope/blob/main/docs/NAVIGATION.md
+  - https://github.com/frc-web-components/app/releases
+
+
+A Swerve drive includes:
+- 4 Swerve Modules:
+  - Drive motor
+  - Angle motor
+  - Absolute encoder
+- Gyroscope
+The types of each do not matter and can work with eachother regardless (varying degrees of success)
+
+Common Issues:
+- Bad center of gravity
+- Non-centered gyro
+- Non-square drive train
+
+
+A SwerveDrive in the code requires:
+- SwerveDriveKinematics
+  - to determine the rotation and speed of each wheel
+- SwerveModuleState
+  - sets the state of each SwerveModule based on the kinematics and the ChassisSpeeds
+- SwerveModule 
+  - A module that handles the individual swerves and their motors
+- SwerveDriveOdometry
+  - Keeps track of the position and rotation of the robot by constantly checking the speed and rotation of the motors and the position of the gyro
+
+The desired angle is calculated either by hand or using SwerveDriveKinematics to use the module location to determine the rotation and speed of each wheel based on a ChassisSpeeds object.
+
+To do this you make a Kinematics object, within the constructor you make a new SwerveDriveKinematics object and insert the wheels.
+
+here's what that looks like
+
+kinematics = new SwerveDriveKinematics(
+	// The units have to be in meters
+	// you can do this simply with the edu.wpi.first.math.util.Units module and the function inchesToMeters()
+	new Translation2d(posy, posx)
+	// Repeat for each wheel and it's position from the center
+);
+
+The reason we need the kinematics is to make the SwerveModuleState which will be used to make the swerveModules (more on that in the swerve-module-notes file)
+
+Also in the constructor you define the gyro and create the odometry object. Creating the gyro depends on the gyro you use and you'll probably have to check the docs for the gyro you have.
+
+Creating the odometry requires the kinematics, the gyro,
+
+
+
+
+
