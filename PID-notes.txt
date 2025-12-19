@@ -1,0 +1,24 @@
+Sources: 
+https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/introduction-to-pid.html
+
+PID stands for Proportional, Integral, and Derivative terms.
+PID is one of the most common feedback controllers used in robotics
+
+A feedback controller (or "closed-loop controller") is a class of algorithms that use sensors to measure what a mechanism is doing, where it is, and where you want it to be. It uses that information to issue corrective commands to move it to where you want it to be. As opposed to the more simple feedforward controller which uses information about how the mechanism is supposed to work and figures out the best command to get it to the desired position.
+
+Most teams prefer feedback controllers for their ability to adapt to problems instead of the more rigid but simple feedforward.
+
+PID has a multitude of important nomenclature that is referenced in documentation and code. The term Reference or Setpoint means the desired state of the mechanism, the term output or process variable refers to the measured state of the mechanism. The Error is the difference between the reference and the output
+
+here are some common names for each of these values in the code:
+
+r(t) - Setpoint, Reference
+y(t) - Output, Process Variable
+u(t) - Control Signal/Effort
+e(t) - Error
+
+This is some jargon to put in your head for later: 
+The proportional term drives the position error to zero, the derivative term drives the velocity error to zero, and the integral term drives the total accumulated error-over-time to zero. The closer these numbers get to zero the closer the mechanism is to the desired position.
+
+The three terms of PID are added together to produce the control signal.
+
