@@ -4,7 +4,7 @@ https://docs.yagsl.com/fundamentals/swerve-drive
 
 This goes over how a SwerveDrive works, the information in here can also be found in a more verbose format in the link above.
 
-Tips:
+Tips to keep in mind:
 - Center the gyro on the robot
 - Good tools for debugging:
   - https://github.com/Mechanical-Advantage/AdvantageScope/blob/main/docs/NAVIGATION.md
@@ -12,7 +12,7 @@ Tips:
 
 
 A Swerve drive includes:
-- 4 Swerve Modules:
+- 4 Swerve Modules which include:
   - Drive motor
   - Angle motor
   - Absolute encoder
@@ -44,15 +44,18 @@ here's what that looks like
 kinematics = new SwerveDriveKinematics(
 	// The units have to be in meters
 	// you can do this simply with the edu.wpi.first.math.util.Units module and the function inchesToMeters()
-	new Translation2d(posy, posx)
-	// Repeat for each wheel and it's position from the center
+	new Translation2d(posy, posx),
+	new Translation2d(posy, posx), // you repeat this for each module on the swerve
+	// posx and posy are the distance the swerve modules are from the center in meters
+	// A sane person would first measure it in inches and then just convert it in the code
+	//its easier and more often than not more accurate than converting it yourself or measuring it in meters first
 );
 
 The reason we need the kinematics is to make the SwerveModuleState which will be used to make the swerveModules (more on that in the swerve-module-notes file)
 
-Also in the constructor you define the gyro and create the odometry object. Creating the gyro depends on the gyro you use and you'll probably have to check the docs for the gyro you have.
+Also in the constructor you define the gyro and create the odometry object. Creating the gyro depends on what hardware you use (it varies based on the gyros) and you'll probably have to check the docs for the gyro you have.
 
-Creating the odometry requires the kinematics, the gyro,
+Creating the odometry requires the kinematics, the gyro, and the swerveModule's positions. 
 
 
 
